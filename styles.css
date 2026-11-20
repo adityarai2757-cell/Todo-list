@@ -1,0 +1,267 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: #242236;
+  background: #f2efff;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 32rem),
+    linear-gradient(135deg, #ede9ff 0%, #f8f7ff 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  width: min(620px, calc(100% - 32px));
+  min-height: 540px;
+  margin: 32px 0;
+  padding: 38px;
+  border: 1px solid rgba(111, 96, 186, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 70px rgba(72, 61, 133, 0.15);
+}
+
+.app__header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: #81789f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 8vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.summary {
+  margin: 10px 0 0;
+  color: #858197;
+}
+
+.todo-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.todo-form input {
+  min-width: 0;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #dedbea;
+  border-radius: 12px;
+  outline: none;
+  background: #fbfbfe;
+  color: #242236;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.todo-form input:focus {
+  border-color: #7466d9;
+  box-shadow: 0 0 0 4px rgba(116, 102, 217, 0.12);
+}
+
+.todo-form button {
+  height: 52px;
+  min-width: 82px;
+  border: 0;
+  border-radius: 12px;
+  background: #6657d9;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(102, 87, 217, 0.22);
+}
+
+.todo-form button:hover {
+  background: #594bc7;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0 14px;
+  border-bottom: 1px solid #eeecf5;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+}
+
+.filter,
+.clear-button {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #858197;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.filter {
+  padding: 8px 10px;
+}
+
+.filter.is-active {
+  background: #eeebff;
+  color: #6253c7;
+}
+
+.clear-button {
+  padding: 8px 0 8px 8px;
+}
+
+.clear-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.todo-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 58px;
+  border-bottom: 1px solid #f0eef6;
+}
+
+.todo-item__toggle {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.todo-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d2cfea;
+  border-radius: 6px;
+  transition: 160ms ease;
+}
+
+.todo-checkbox:focus-visible + .checkmark {
+  outline: 3px solid rgba(116, 102, 217, 0.2);
+  outline-offset: 2px;
+}
+
+.todo-checkbox:checked + .checkmark {
+  border-color: #6657d9;
+  background:
+    linear-gradient(135deg, transparent 43%, white 44%, white 56%, transparent 57%)
+      50% 55% / 13px 13px no-repeat,
+    #6657d9;
+}
+
+.todo-text {
+  overflow-wrap: anywhere;
+  transition: color 160ms ease;
+}
+
+.todo-checkbox:checked ~ .todo-text {
+  color: #aaa6b7;
+  text-decoration: line-through;
+}
+
+.delete-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #aaa5bb;
+  font-size: 1.35rem;
+  line-height: 1;
+  opacity: 0;
+  transition: 160ms ease;
+}
+
+.todo-item:hover .delete-button,
+.delete-button:focus-visible {
+  opacity: 1;
+}
+
+.delete-button:hover {
+  background: #f7e9ec;
+  color: #c46178;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 520px) {
+  body {
+    place-items: start center;
+  }
+
+  .app {
+    width: calc(100% - 20px);
+    min-height: calc(100vh - 20px);
+    margin: 10px 0;
+    padding: 24px 18px;
+  }
+
+  .toolbar {
+    align-items: flex-end;
+  }
+
+  .clear-button {
+    max-width: 90px;
+  }
+
+  .delete-button {
+    opacity: 1;
+  }
+}

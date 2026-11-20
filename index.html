@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6657d9">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app" aria-labelledby="app-title">
+      <header class="app__header">
+        <p class="eyebrow">My workspace</p>
+        <h1 id="app-title">Things to do</h1>
+        <p id="task-summary" class="summary" aria-live="polite">0 tasks left</p>
+      </header>
+
+      <form id="todo-form" class="todo-form" autocomplete="off">
+        <label class="sr-only" for="todo-input">Add a new task</label>
+        <input
+          id="todo-input"
+          name="todo"
+          type="text"
+          placeholder="What needs to be done?"
+          maxlength="200"
+          required
+        >
+        <button type="submit" aria-label="Add task">Add</button>
+      </form>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="active" aria-pressed="false">Active</button>
+          <button class="filter" type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+        <button id="clear-completed" class="clear-button" type="button">
+          Clear completed
+        </button>
+      </div>
+
+      <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+    </main>
+
+    <template id="todo-template">
+      <li class="todo-item">
+        <label class="todo-item__toggle">
+          <input class="todo-checkbox" type="checkbox">
+          <span class="checkmark" aria-hidden="true"></span>
+          <span class="todo-text"></span>
+        </label>
+        <button class="delete-button" type="button" aria-label="Delete task">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
