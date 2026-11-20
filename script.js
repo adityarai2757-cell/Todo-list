@@ -77,9 +77,19 @@ function toggleTask(id) {
 }
 
 function deleteTask(id) {
-  tasks = tasks.filter((task) => task.id !== id);
-  saveTasks();
-  render();
+  const item = list.querySelector(`[data-id="${CSS.escape(id)}"]`);
+  if (!item) return;
+
+  item.classList.add("is-leaving");
+  item.addEventListener(
+    "animationend",
+    () => {
+      tasks = tasks.filter((task) => task.id !== id);
+      saveTasks();
+      render();
+    },
+    { once: true },
+  );
 }
 
 form.addEventListener("submit", (event) => {

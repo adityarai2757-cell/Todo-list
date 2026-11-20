@@ -159,6 +159,31 @@ h1 {
   align-items: center;
   min-height: 58px;
   border-bottom: 1px solid #f0eef6;
+  animation: todo-enter 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.todo-item.is-leaving {
+  pointer-events: none;
+  animation: todo-leave 180ms ease forwards;
+}
+
+@keyframes todo-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes todo-leave {
+  to {
+    opacity: 0;
+    transform: translateX(18px) scale(0.98);
+  }
 }
 
 .todo-item__toggle {
@@ -180,7 +205,7 @@ h1 {
   height: 20px;
   border: 2px solid #d2cfea;
   border-radius: 6px;
-  transition: 160ms ease;
+  transition: 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .todo-checkbox:focus-visible + .checkmark {
@@ -190,6 +215,7 @@ h1 {
 
 .todo-checkbox:checked + .checkmark {
   border-color: #6657d9;
+  transform: scale(1.08);
   background:
     linear-gradient(135deg, transparent 43%, white 44%, white 56%, transparent 57%)
       50% 55% / 13px 13px no-repeat,
@@ -198,12 +224,22 @@ h1 {
 
 .todo-text {
   overflow-wrap: anywhere;
-  transition: color 160ms ease;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .todo-checkbox:checked ~ .todo-text {
   color: #aaa6b7;
   text-decoration: line-through;
+}
+
+.todo-item:has(.todo-checkbox:checked) .todo-text {
+  animation: text-complete 220ms ease;
+}
+
+@keyframes text-complete {
+  50% {
+    transform: translateX(4px);
+  }
 }
 
 .delete-button {
@@ -227,6 +263,31 @@ h1 {
 .delete-button:hover {
   background: #f7e9ec;
   color: #c46178;
+}
+
+.todo-form button,
+.filter,
+.clear-button {
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.todo-form button:active,
+.filter:active,
+.clear-button:active {
+  transform: scale(0.96);
+}
+
+.todo-item:nth-child(2) {
+  animation-delay: 35ms;
+}
+
+.todo-item:nth-child(3) {
+  animation-delay: 70ms;
+}
+
+.todo-item:nth-child(4) {
+  animation-delay: 105ms;
 }
 
 .sr-only {
@@ -263,5 +324,16 @@ h1 {
 
   .delete-button {
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
   }
 }
